@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useOrderStore } from '../../../store/use-order-store';
+import { useOrderStore } from '../../../store/useOrderStore';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';

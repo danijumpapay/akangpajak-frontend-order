@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Search, Menu, X } from 'lucide-react';
-import { useOrderStore } from '../../store/use-order-store';
+import { useOrderStore } from '../../store/useOrderStore';
 
 export const Navbar = () => {
   const resetOrder = useOrderStore((s) => s.resetOrder);

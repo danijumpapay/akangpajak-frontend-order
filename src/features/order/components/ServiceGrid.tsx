@@ -1,4 +1,4 @@
-import { useOrderStore } from '../../../store/use-order-store';
+import { useOrderStore } from '../../../store/useOrderStore';
 import { HelpCircle } from 'lucide-react';
 
 const SERVICES = [
