@@ -30,7 +30,7 @@ function App() {
             <ServiceGrid />
           </div>
         ) : (
-          <div className="mt-10 max-w-2xl mx-auto px-2">
+          <div className="w-full">
             <OrderForm />
           </div>
         )}
