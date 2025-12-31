@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         jumpapay: {
-          blue: '#2AB0E5', // Warna identitas JumpaPay
+          blue: '#2AB0E5',
           dark: '#1E293B',
         }
       }

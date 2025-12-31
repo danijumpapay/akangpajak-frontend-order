@@ -1,4 +1,5 @@
 import { useOrderStore } from '../../../store/use-order-store';
+import { HelpCircle } from 'lucide-react';
 
 const SERVICES = [
   { id: '1', title: 'Mutasi STNK', price: 150000, image: '/services/mutasi.png' },
@@ -12,11 +13,13 @@ export const ServiceGrid = () => {
   const setService = useOrderStore((s) => s.setService);
 
   return (
-    <section className="w-full mt-12">
+    <section className="w-full">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Layanan Kami</h2>
-        <button className="text-sm text-gray-500 flex items-center gap-2 border border-gray-200 px-4 py-1.5 rounded-full hover:bg-gray-50">
-          <span>❓</span> Bantuan
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800">Layanan Kami</h2>
+
+        <button className="hidden md:flex items-center gap-2 bg-white border border-gray-200 pl-3 pr-5 py-2 rounded-full shadow-sm hover:bg-gray-50">
+          <HelpCircle size={20} className="text-[#1A1A1A]" />
+          <span className="text-[#1A1A1A] font-bold text-[15px]">Bantuan</span>
         </button>
       </div>
       
@@ -24,15 +27,17 @@ export const ServiceGrid = () => {
         {SERVICES.map((item) => (
           <div 
             key={item.id}
-            onClick={() => setService(item)} // Sekarang sudah tidak error
-            className="bg-white rounded-2xl p-0 overflow-hidden border border-transparent hover:border-jumpapay-blue transition-all cursor-pointer group"
+            onClick={() => setService(item)}
+            className="bg-white rounded-2xl overflow-hidden cursor-pointer group transition-all"
           >
-            <img 
-              src={item.image} // Pastikan ini juga disesuaikan menjadi .image
-              alt={item.title} 
-              className="w-full aspect-square object-cover" 
-            />
-            <div className="p-3">
+            <div className="aspect-square rounded-2xl overflow-hidden">
+               <img 
+                 src={item.image}
+                 alt={item.title} 
+                 className="w-full h-full object-cover transition-transform group-hover:scale-110" 
+               />
+            </div>
+            <div className="pt-3 px-1">
               <h3 className="font-bold text-gray-800 text-sm md:text-base leading-tight">{item.title}</h3>
               <div className="mt-2 flex flex-col">
                 <span className="text-[10px] text-gray-400 uppercase font-bold tracking-tighter">Mulai dari</span>

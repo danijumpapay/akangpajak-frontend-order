@@ -29,7 +29,6 @@ export const OrderForm = () => {
       <h2 className="text-xl font-bold mb-6 text-gray-800">Detail Pemesan</h2>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* Input Email */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
           <input
@@ -40,7 +39,6 @@ export const OrderForm = () => {
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
         </div>
 
-        {/* Input WhatsApp */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp</label>
           <input
@@ -51,7 +49,6 @@ export const OrderForm = () => {
           {errors.whatsapp && <p className="text-red-500 text-xs mt-1">{errors.whatsapp.message}</p>}
         </div>
 
-        {/* Input Plat Nomor */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Nomor Plat Kendaraan</label>
           <input

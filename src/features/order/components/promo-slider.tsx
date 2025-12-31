@@ -1,9 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
 
 const PROMO_BANNERS = [
   { 
@@ -14,29 +13,30 @@ const PROMO_BANNERS = [
   { 
     id: '2', 
     img: 'https://placehold.co/1300x308/2AB0E5/white?text=Promo+JumpaPay', 
-    alt: 'Promo JumpaPay' 
+    alt: 'Promo Lifepal' 
   },
 ];
 
 export const PromoSlider = () => {
   return (
-    <div className="w-full mt-6 md:mt-10 shadow-md bg-gray-100" style={{ borderRadius: '32px', overflow: 'hidden' }}>
+    <div className="w-full overflow-hidden rounded-xl md:rounded-[32px] shadow-sm bg-gray-50">
       <Swiper
-        modules={[Autoplay, Pagination, EffectFade]}
-        effect="fade"
+        modules={[Autoplay, Pagination]}
         loop={true}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
+        pagination={{ 
+          clickable: true,
+          dynamicBullets: true 
+        }}
         className="w-full"
       >
         {PROMO_BANNERS.map((banner) => (
           <SwiperSlide key={banner.id}>
-            <div className="relative w-full h-0 pb-[23.69%]"> 
+            <div className="relative w-full h-0 pb-[23.68%] md:pb-[23.69%]"> 
               <img 
                 src={banner.img} 
                 alt={banner.alt} 
                 className="absolute top-0 left-0 w-full h-full object-cover"
-                style={{ display: 'block' }}
               />
             </div>
           </SwiperSlide>
