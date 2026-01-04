@@ -6,9 +6,9 @@ const AddressModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-100 flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="bg-white w-full max-w-lg rounded-[32px] overflow-hidden relative shadow-2xl animate-in fade-in zoom-in duration-200">
+      <div className="bg-white w-full max-w-lg rounded-4xl overflow-hidden relative shadow-2xl animate-in fade-in zoom-in duration-200">
         <div className="p-6 border-b border-gray-50 flex items-center justify-between">
           <h3 className="font-bold text-gray-800 text-lg font-inter">Ubah Alamat Penjemputan</h3>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-400">
@@ -76,9 +76,9 @@ export const PaymentPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white border border-gray-100 rounded-[32px] p-6 md:p-8 shadow-sm">
+          <div className="bg-white border border-gray-100 rounded-4xl p-6 md:p-8 shadow-sm">
             <h3 className="font-bold text-gray-800 mb-6 text-base font-inter">Tipe Penjemputan Dokumen</h3>
-            <label className="flex items-center justify-between p-5 border border-jumpapay-blue bg-blue-50/30 rounded-[24px] cursor-pointer">
+            <label className="flex items-center justify-between p-5 border border-jumpapay-blue bg-blue-50/30 rounded-3xl cursor-pointer transition-colors">
               <div className="flex items-center gap-4">
                 <div className="w-6 h-6 rounded-full border-2 border-jumpapay-blue flex items-center justify-center shrink-0">
                   <div className="w-3 h-3 bg-jumpapay-blue rounded-full"></div>
@@ -115,10 +115,9 @@ export const PaymentPage = () => {
             </div>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-[32px] p-6 md:p-8 shadow-sm space-y-8">
+          <div className="bg-white border border-gray-100 rounded-4xl p-6 md:p-8 shadow-sm space-y-8">
             <h3 className="font-bold text-gray-800 text-base font-inter">Metode Pembayaran</h3>
             
-            {/* Section: Instant Payment */}
             <div className="space-y-4">
               <h4 className="text-sm font-bold font-inter text-gray-800">Instant Payment</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -146,10 +145,9 @@ export const PaymentPage = () => {
               </div>
             </div>
 
-            {/* Section: Transfer Bank */}
             <div className="space-y-4">
               <h4 className="text-sm font-bold font-inter text-gray-800">Transfer Bank</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {bankTransfers.map((method) => (
                   <div 
                     key={method.id} 
@@ -176,10 +174,10 @@ export const PaymentPage = () => {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white border border-gray-100 rounded-[32px] p-8 shadow-sm sticky top-8">
+          <div className="bg-white border border-gray-100 rounded-4xl p-8 shadow-sm sticky top-8">
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-bold text-gray-800 text-base font-inter">Detail Order</h3>
-              <button className="flex items-center gap-1 bg-jumpapay-blue text-white px-3 py-1.5 rounded-lg text-[10px] font-extrabold font-inter uppercase">TAMBAH JASA</button>
+              <button className="flex items-center gap-1 bg-jumpapay-blue text-white px-3 py-1.5 rounded-lg text-[10px] hover:bg-sky-500 font-extrabold font-inter tracking-wide">Tambah Jasa</button>
             </div>
             <div className="flex items-center gap-4 mb-8">
               <img src={selectedService?.image || '/services/mutasi.png'} className="w-16 h-16 rounded-2xl object-cover" alt="Service" />
@@ -187,7 +185,7 @@ export const PaymentPage = () => {
                 <p className="font-bold text-[13px] text-gray-800 leading-tight mb-1 font-inter">{selectedService?.title || 'Mutasi STNK (Cabut Berkas)'}</p>
                 <p className="text-[13px] font-bold text-gray-900 font-inter">Rp2.651.000</p>
               </div>
-              <button className="text-[10px] font-bold text-gray-500 border border-gray-100 px-2 py-1 rounded-md font-inter">Detail Harga</button>
+              <button className="text-[10px] font-bold text-gray-500 border border-gray-100 px-2 py-1 rounded-md font-inter hover:bg-gray-50 transition-colors">Detail Harga</button>
             </div>
             <div className="space-y-4 pt-6 border-t border-gray-50">
               <div className="flex justify-between text-sm">
@@ -203,10 +201,12 @@ export const PaymentPage = () => {
               </div>
               <div className="pt-6 border-t border-dashed border-gray-200 flex justify-between items-center">
                 <span className="font-bold text-gray-800 font-inter text-lg">Total</span>
-                <span className="text-2xl font-black text-gray-900 underline decoration-gray-100 underline-offset-8 font-inter">2.651.000</span>
+                <span className="text-2xl font-black text-gray-900 underline decoration-gray-100 underline-offset-8 font-inter tracking-tight">2.651.000</span>
               </div>
             </div>
-            <button className="w-full bg-jumpapay-blue text-white py-4.5 rounded-[20px] font-extrabold text-base mt-8 shadow-lg shadow-sky-100 hover:bg-sky-500 transition-all active:scale-[0.98] font-inter">Bayar Sekarang</button>
+            <button className="w-full bg-jumpapay-blue text-white py-4.5 rounded-2xl font-extrabold text-base mt-8 shadow-lg shadow-sky-100 hover:bg-sky-500 transition-all active:scale-[0.98] font-inter">
+              Bayar Sekarang
+            </button>
           </div>
         </div>
       </div>

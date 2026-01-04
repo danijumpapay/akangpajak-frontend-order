@@ -4,10 +4,11 @@ import { useOrderStore } from '../../store/useOrderStore';
 
 export const Navbar = () => {
   const resetOrder = useOrderStore((s) => s.resetOrder);
+  const setView = useOrderStore((s) => s.setView);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 font-inter">
       <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-16 py-3 flex items-center justify-between">
         <div className="flex items-center gap-8 flex-1">
           <img 
@@ -39,7 +40,13 @@ export const Navbar = () => {
           </button>
 
           <div className="hidden md:flex items-center gap-3">
-            <button className="bg-jumpapay-blue text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all">
+            <button 
+              onClick={() => {
+                setView('tracking');
+                setIsOpen(false);
+              }}
+              className="bg-jumpapay-blue text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-sky-500 transition-all"
+            >
               Cek Order
             </button>
             <button className="border border-gray-200 text-gray-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-gray-50 transition-all">
@@ -51,7 +58,13 @@ export const Navbar = () => {
 
       <div className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-b border-gray-100 ${isOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-4 py-4 flex flex-col gap-3">
-          <button className="w-full bg-jumpapay-blue text-white px-5 py-3 rounded-xl text-sm font-semibold text-center">
+          <button 
+            onClick={() => {
+              setView('tracking');
+              setIsOpen(false);
+            }}
+            className="w-full bg-jumpapay-blue text-white px-5 py-3 rounded-xl text-sm font-bold text-center active:scale-[0.98] transition-all"
+          >
             Cek Order
           </button>
           <button className="w-full border border-gray-200 text-gray-600 px-5 py-3 rounded-xl text-sm font-semibold text-center">

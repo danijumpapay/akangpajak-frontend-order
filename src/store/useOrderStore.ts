@@ -18,9 +18,11 @@ interface OrderData {
 
 interface OrderState {
   step: number;
+  view: 'order' | 'tracking' | 'refund';
   selectedService: Service | null;
   orderData: OrderData;
   
+  setView: (view: 'order' | 'tracking' | 'refund') => void;
   setService: (service: Service) => void;
   setOrderData: (data: Partial<OrderData>) => void;
   nextStep: () => void;
@@ -32,14 +34,17 @@ export const useOrderStore = create<OrderState>()(
   persist(
     (set) => ({
       step: 1,
+      view: 'order',
       selectedService: null,
       orderData: {
         vehicleType: 'Mobil',
         statusMutasi: 'Lengkap',
       },
 
+      setView: (view) => set({ view }),
+
       setService: (service) => 
-        set({ selectedService: service, step: 2 }),
+        set({ selectedService: service, step: 2, view: 'order' }),
 
       setOrderData: (data) => 
         set((state) => ({ 
@@ -47,13 +52,13 @@ export const useOrderStore = create<OrderState>()(
         })),
 
       nextStep: () => 
-        set((state) => ({ step: state.step + 1 })),
+        set((state) => ({ step: state.step + 1, view: 'order' })),
 
       prevStep: () => 
-        set((state) => ({ step: Math.max(1, state.step - 1) })),
+        set((state) => ({ step: Math.max(1, state.step - 1), view: 'order' })),
 
       resetOrder: () => 
-        set({ step: 1, selectedService: null, orderData: {} }),
+        set({ step: 1, view: 'order', selectedService: null, orderData: { vehicleType: 'Mobil', statusMutasi: 'Lengkap' } }),
     }),
     {
       name: 'jumpapay-order-storage',
