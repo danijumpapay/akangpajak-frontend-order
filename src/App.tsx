@@ -4,6 +4,7 @@ import { TrackingPage } from './features/tracking/components/TrackingPage';
 import { RefundPage } from './features/tracking/components/RefundPage';
 import { useOrderStore } from './store/useOrderStore';
 import { Home, Search, Video, HelpCircle } from 'lucide-react';
+import { HelpPage } from './features/support/components/HelpPage';
 
 function App() {
   const { step, view, setView, resetOrder } = useOrderStore(); 
@@ -17,6 +18,8 @@ function App() {
           <TrackingPage />
         ) : view === 'refund' ? (
           <RefundPage />
+        ) : view === 'bantuan' ? (
+          <HelpPage />
         ) : (
           <div className="animate-in fade-in duration-500">
             {step === 1 ? (
@@ -59,8 +62,11 @@ function App() {
           <span className="text-[10px] font-semibold font-inter">Tutorial</span>
         </button>
 
-        <button className="flex flex-col items-center gap-1 text-gray-400">
-          <HelpCircle size={22} strokeWidth={2} />
+        <button 
+          onClick={() => setView('bantuan')}
+          className={`flex flex-col items-center gap-1 ${view === 'bantuan' ? 'text-jumpapay-blue' : 'text-gray-400'}`}
+        >
+          <HelpCircle size={22} strokeWidth={view === 'bantuan' ? 2.5 : 2} />
           <span className="text-[10px] font-semibold font-inter">Bantuan</span>
         </button>
       </div>

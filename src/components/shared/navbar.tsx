@@ -45,11 +45,11 @@ export const Navbar = () => {
                 setView('tracking');
                 setIsOpen(false);
               }}
-              className="bg-jumpapay-blue text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-sky-500 transition-all"
+              className="bg-jumpapay-blue text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-sky-500 transition-all cursor-pointer"
             >
               Cek Order
             </button>
-            <button className="border border-gray-200 text-gray-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-gray-50 transition-all">
+            <button className="border border-gray-200 text-gray-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-gray-50 transition-all cursor-pointer">
               Tutorial Order
             </button>
           </div>

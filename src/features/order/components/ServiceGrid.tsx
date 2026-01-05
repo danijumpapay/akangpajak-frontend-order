@@ -11,13 +11,17 @@ const SERVICES = [
 
 export const ServiceGrid = () => {
   const setService = useOrderStore((s) => s.setService);
+  const setView = useOrderStore((s) => s.setView);
 
   return (
     <section className="w-full">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl md:text-2xl font-bold text-gray-800">Layanan Kami</h2>
 
-        <button className="hidden md:flex items-center gap-2 bg-white border border-gray-200 pl-3 pr-5 py-2 rounded-full shadow-sm hover:bg-gray-50">
+        <button 
+          onClick={() => setView('bantuan')}
+          className="hidden md:flex items-center gap-2 bg-white border border-gray-200 pl-3 pr-5 py-2 rounded-full shadow-sm hover:bg-gray-50 transition-all active:scale-95 cursor-pointer"
+        >
           <HelpCircle size={20} className="text-[#1A1A1A]" />
           <span className="text-[#1A1A1A] font-bold text-[15px]">Bantuan</span>
         </button>
