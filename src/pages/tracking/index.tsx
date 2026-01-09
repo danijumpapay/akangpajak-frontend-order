@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useOrderStore } from '@/store/useOrderStore';
 import { Breadcrumbs } from '@/components/shared/Breadcrumbs';
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,11 +7,14 @@ import { SearchForm } from './components/SearchForm';
 import { OrderDetail } from './components/OrderDetail';
 import { StatusTimeline } from './components/StatusTimeline';
 
-
 export const TrackingPage = () => {
-  const { setView } = useOrderStore();
-  const [orderNumber, setOrderNumber] = useState('');
-  const [status, setStatus] = useState<'idle' | 'found' | 'not-found'>('idle');
+  const { setView, orderId, setOrderId, setStep } = useOrderStore();
+  
+  const [orderNumber, setOrderNumber] = useState(() => orderId || '');
+  const [status, setStatus] = useState<'idle' | 'found' | 'not-found'>(() => 
+    (orderId === '12345' || orderId === '11111' || orderId === '00000' || orderId === '99999') ? 'found' : 'idle'
+  );
+  
   const [error, setError] = useState(false);
   const [history, setHistory] = useState<string[]>(() => {
     try {
@@ -20,55 +23,143 @@ export const TrackingPage = () => {
     } catch { return []; }
   });
 
+  useEffect(() => {
+    if (orderId) {
+      if (orderId === '99999') {
+        setView('order');
+        setStep(5);
+      }
+      setOrderId(null);
+    }
+  }, [orderId, setOrderId, setStep, setView]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!orderNumber.trim()) return setError(true);
-    if (!history.includes(orderNumber)) {
-      const newHist = [orderNumber, ...history].slice(0, 5);
+    const targetNumber = orderNumber.trim();
+    
+    if (!targetNumber) {
+      setError(true);
+      return;
+    }
+
+    if (targetNumber === '99999') {
+      setView('order');
+      setStep(5);
+      return;
+    }
+
+    const validIds = ['12345', '11111', '00000'];
+    
+    if (!history.includes(targetNumber) && validIds.includes(targetNumber)) {
+      const newHist = [targetNumber, ...history].slice(0, 5);
       setHistory(newHist);
       localStorage.setItem('order_history', JSON.stringify(newHist));
     }
+    
     setError(false);
-    setStatus(orderNumber === '12345' ? 'found' : 'not-found');
+    setStatus(validIds.includes(targetNumber) ? 'found' : 'not-found');
   };
 
-  const orderData = [
-    { label: "Nomor Order", val: "12345" },
-    { label: "Tanggal Order", val: "11/01/2025" },
-    { label: "Nama", val: "Rayhan Alfaruq" },
-    { label: "Layanan", val: "Pajak 1 Tahun" },
-    { label: "Total Harga", val: "Rp240.000" }
-  ];
+  const currentOrderData = useMemo(() => {
+    const baseData = {
+      nama: "Rayhan Alfaruq",
+      layanan: orderNumber === '12345' ? "Mutasi STNK" : "Pajak 1 Tahun",
+      harga: orderNumber === '12345' ? "Rp2.651.000" : "Rp240.000",
+      tanggal: "11/01/2026"
+    };
 
-  const steps = [
-    { title: "Verifikasi Dokumen", completed: true },
-    { title: "Pengambilan Dokumen", completed: true },
-    { title: "Pengurusan Dokumen", completed: false },
-    { title: "Pengembalian Dokumen", completed: false },
-  ];
+    return [
+      { label: "Nomor Order", val: orderNumber },
+      { label: "Tanggal Order", val: baseData.tanggal },
+      { label: "Nama", val: baseData.nama },
+      { label: "Layanan", val: baseData.layanan },
+      { label: "Total Harga", val: baseData.harga }
+    ];
+  }, [orderNumber]);
+
+  const steps = useMemo(() => {
+    if (orderNumber === '11111') {
+      return [
+        { title: "Verifikasi Dokumen", completed: true },
+        { title: "Pengambilan Dokumen", completed: true },
+        { title: "Pengurusan Dokumen", completed: true },
+        { title: "Selesai", completed: true },
+      ];
+    }
+    if (orderNumber === '00000') {
+      return [
+        { title: "Pengajuan Pengembalian", completed: true },
+        { title: "Verifikasi Admin", completed: false },
+        { title: "Proses Refund", completed: false },
+        { title: "Selesai", completed: false },
+      ];
+    }
+    return [
+      { title: "Verifikasi Dokumen", completed: true },
+      { title: "Pengambilan Dokumen", completed: true },
+      { title: "Pengurusan Dokumen", completed: false },
+      { title: "Pengembalian Dokumen", completed: false },
+    ];
+  }, [orderNumber]);
+
+  const isCompleted = orderNumber === '11111';
+  const isRefundStatus = orderNumber === '00000';
+  const canRefund = isCompleted;
 
   return (
-    <div className="max-w-7xl mx-auto md:py-8 space-y-8 font-inter animate-in fade-in">
-      <Breadcrumbs currentPage="Cek Order" />
+    <div className="max-w-7xl mx-auto md:py-8 space-y-8 font-inter animate-in fade-in duration-500">
+      <div className="text-left">
+        <Breadcrumbs currentPage="Cek Order" />
+      </div>
       
       <div className="space-y-2 text-left">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Cek Order</h1>
+        <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Cek Order</h1>
         <p className="text-sm text-gray-500">Pantau progress orderan kamu dengan mencari nomor order di sini</p>
       </div>
 
-      <Card className="rounded-3xl border-gray-100 shadow-sm"><CardContent className="p-6 md:p-8">
-        <SearchForm orderNumber={orderNumber} setOrderNumber={setOrderNumber} handleSearch={handleSearch} error={error} history={history} />
-      </CardContent></Card>
+      <Card className="rounded-[32px] border-gray-100 shadow-sm overflow-hidden bg-white">
+        <CardContent className="p-6 md:p-8">
+          <SearchForm 
+            orderNumber={orderNumber} 
+            setOrderNumber={setOrderNumber} 
+            handleSearch={handleSearch} 
+            error={error} 
+            history={history} 
+          />
+        </CardContent>
+      </Card>
 
       {status === 'found' && (
-        <Card className="rounded-[32px] border-gray-100 shadow-xl animate-in slide-in-from-top-4"><CardContent className="p-6 md:p-10 space-y-8">
-          <h3 className="font-bold text-gray-800 border-b border-gray-50 pb-4 text-left">Order Detail</h3>
-          <OrderDetail data={orderData} />
-          <StatusTimeline steps={steps} />
-          <Button onClick={() => setView('refund')} variant="outline" className="w-full h-14 rounded-full border-2 border-jumpapay-blue text-jumpapay-blue font-bold transition-all hover:bg-jumpapay-blue hover:text-white hover:shadow-md">
-            Ajukan Refund
-          </Button>
-        </CardContent></Card>
+        <Card className="rounded-[32px] border-gray-100 shadow-xl shadow-gray-100/50 animate-in slide-in-from-top-4 duration-500 bg-white">
+          <CardContent className="p-6 md:p-10 space-y-10 text-left">
+            <div className="flex items-center justify-between border-b border-gray-50 pb-6">
+              <h3 className="font-bold text-gray-800 text-lg">Order Detail</h3>
+              <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider ${
+                isCompleted ? 'bg-green-50 text-green-600' : 
+                isRefundStatus ? 'bg-orange-50 text-orange-600' : 
+                'bg-blue-50 text-[#27AAE1]'
+              }`}>
+                {isCompleted ? 'Selesai' : isRefundStatus ? 'Refund Diproses' : 'In Progress'}
+              </span>
+            </div>
+            
+            <OrderDetail data={currentOrderData} />
+            
+            <div className="py-4">
+              <StatusTimeline steps={steps} />
+            </div>
+            
+            {canRefund && (
+              <Button 
+                onClick={() => setView('refund')} 
+                variant="outline" 
+                className="w-full h-14 rounded-full border-2 border-jumpapay-blue text-jumpapay-blue font-bold transition-all hover:bg-jumpapay-blue hover:text-white hover:shadow-md"
+              >
+                Ajukan Pembatalan / Refund
+              </Button>
+            )}
+          </CardContent>
+        </Card>
       )}
 
       {status === 'not-found' && (

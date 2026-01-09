@@ -20,16 +20,24 @@ interface OrderData {
   kotaTujuan?: string;
 }
 
+interface OrderData {
+  ktp?: File | null;
+  stnk?: File | null;
+  bpkb?: File | null;
+}
+
 interface OrderState {
   step: number;
   view: 'order' | 'tracking' | 'refund' | 'bantuan' | 'tutorial';
   selectedService: Service | null;
   orderData: OrderData;
+  orderId: string | null;
   
   setView: (view: 'order' | 'tracking' | 'refund' | 'bantuan' | 'tutorial') => void;
   setStep: (step: number) => void;
   setService: (service: Service) => void;
   setOrderData: (data: Partial<OrderData>) => void;
+  setOrderId: (id: string | null) => void;
   nextStep: () => void;
   prevStep: () => void;
   resetOrder: () => void;
@@ -41,6 +49,7 @@ export const useOrderStore = create<OrderState>()(
       step: 1,
       view: 'order',
       selectedService: null,
+      orderId: null,
       orderData: {
         jenisKendaraan: 'Mobil',
         jenisMutasi: 'Lengkap',
@@ -59,6 +68,8 @@ export const useOrderStore = create<OrderState>()(
           orderData: { ...state.orderData, ...data } 
         })),
 
+      setOrderId: (id) => set({ orderId: id }),
+
       nextStep: () => 
         set((state) => ({ step: state.step + 1, view: 'order' })),
 
@@ -70,6 +81,7 @@ export const useOrderStore = create<OrderState>()(
           step: 1, 
           view: 'order', 
           selectedService: null, 
+          orderId: null,
           orderData: { 
             jenisKendaraan: 'Mobil', 
             jenisMutasi: 'Lengkap', 

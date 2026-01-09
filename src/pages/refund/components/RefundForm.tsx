@@ -1,7 +1,14 @@
-import { Loader2, ChevronDown } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { RefundFormData, RefundErrors } from "../types";
 
 interface RefundFormProps {
@@ -53,7 +60,7 @@ export const RefundForm = ({
               placeholder="0"
               value={formData.nominalAktual}
               onChange={onNominalChange}
-              className={`pl-10 bg-white border rounded-2xl h-12 focus-visible:ring-jumpapay-blue/5 ${errors.nominalAktual ? 'border-red-500' : 'border-gray-100'} mt-2`}
+              className={`pl-10 bg-white border rounded-2xl h-12 focus-visible:ring-[#27AAE1]/5 ${errors.nominalAktual ? 'border-red-500' : 'border-gray-100'} mt-2`}
             />
           </div>
           {errors.nominalAktual && <p className="text-[11px] text-red-500 font-medium ml-1">{errors.nominalAktual}</p>}
@@ -63,19 +70,19 @@ export const RefundForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-bold text-gray-800 ml-1">Pilih Bank</label>
-          <div className="relative">
-            <select 
-              value={formData.bank}
-              onChange={(e) => onInputChange('bank', e.target.value)}
-              className={`w-full h-12 bg-white border rounded-2xl px-4 text-sm appearance-none outline-none focus:border-jumpapay-blue transition-all ${errors.bank ? 'border-red-500' : 'border-gray-100'} mt-2`}
-            >
-              <option value="">Pilih bank yang dituju</option>
-              <option value="bca">BCA</option>
-              <option value="bni">BNI</option>
-              <option value="permata">Permata Bank</option>
-            </select>
-            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
-          </div>
+          <Select 
+            value={formData.bank} 
+            onValueChange={(value) => onInputChange('bank', value)}
+          >
+            <SelectTrigger className={`w-full h-12 bg-white border rounded-2xl px-4 text-sm outline-none focus:ring-0 focus:border-[#27AAE1] transition-all ${errors.bank ? 'border-red-500' : 'border-gray-100'} mt-2`}>
+              <SelectValue placeholder="Pilih bank yang dituju" />
+            </SelectTrigger>
+            <SelectContent className="rounded-xl min-w-(--radix-select-trigger-width)">
+              <SelectItem value="bca">BCA</SelectItem>
+              <SelectItem value="bni">BNI</SelectItem>
+              <SelectItem value="permata">Permata Bank</SelectItem>
+            </SelectContent>
+          </Select>
           {errors.bank && <p className="text-[11px] text-red-500 font-medium ml-1">{errors.bank}</p>}
         </div>
 
@@ -83,7 +90,7 @@ export const RefundForm = ({
           <label className="text-sm font-bold text-gray-800 ml-1">Nomor Rekening</label>
           <Input 
             placeholder="Ketik nomor rekening Anda"
-            className={`bg-white border rounded-2xl h-12 focus-visible:ring-jumpapay-blue/5 ${errors.rekening ? 'border-red-500' : 'border-gray-100'} mt-2`}
+            className={`bg-white border rounded-2xl h-12 focus-visible:ring-[#27AAE1]/5 ${errors.rekening ? 'border-red-500' : 'border-gray-100'} mt-2`}
             value={formData.rekening}
             onChange={(e) => onInputChange('rekening', e.target.value)}
           />
@@ -95,7 +102,7 @@ export const RefundForm = ({
         <label className="text-sm font-bold text-gray-800 ml-1">Catatan Tambahan</label>
         <Textarea 
           placeholder="Ketik catatan tambahan untuk pengajuan refund di sini"
-          className="bg-white border-gray-100 rounded-2xl min-h-25 focus-visible:ring-jumpapay-blue/5 resize-none mt-2"
+          className="bg-white border-gray-100 rounded-2xl min-h-25 focus-visible:ring-[#27AAE1]/5 resize-none mt-2"
           value={formData.catatan}
           onChange={(e) => onInputChange('catatan', e.target.value)}
         />

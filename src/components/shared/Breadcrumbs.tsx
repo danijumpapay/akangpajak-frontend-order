@@ -8,13 +8,20 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
+interface BreadcrumbSegment {
+  label: string;
+  href?: string;
+  onClick?: () => void;
+}
+
 interface BreadcrumbsProps {
   currentPage: string;
+  segments?: BreadcrumbSegment[];
   parentPage?: string;
   onParentClick?: () => void;
 }
 
-export const Breadcrumbs = ({ currentPage, parentPage, onParentClick }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ currentPage, segments, parentPage, onParentClick }: BreadcrumbsProps) => {
   const setStep = useOrderStore((s) => s.setStep);
   const setView = useOrderStore((s) => s.setView);
 
@@ -31,7 +38,18 @@ export const Breadcrumbs = ({ currentPage, parentPage, onParentClick }: Breadcru
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         
-        {parentPage && (
+        {segments && segments.map((segment, index) => (
+          <div key={index} className="flex items-center">
+            <BreadcrumbItem>
+              <BreadcrumbLink onClick={segment.onClick} className="cursor-pointer">
+                {segment.label}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </div>
+        ))}
+
+        {parentPage && !segments && (
           <>
             <BreadcrumbItem>
               <BreadcrumbLink onClick={onParentClick} className="cursor-pointer">

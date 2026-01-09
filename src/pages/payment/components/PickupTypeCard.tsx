@@ -1,10 +1,11 @@
 import { MapPin } from 'lucide-react';
 
 interface PickupTypeCardProps {
+  address: string;
   onEditAddress: () => void;
 }
 
-export const PickupTypeCard = ({ onEditAddress }: PickupTypeCardProps) => {
+export const PickupTypeCard = ({ address, onEditAddress }: PickupTypeCardProps) => {
   return (
     <div className="bg-white border border-gray-100 rounded-[32px] md:rounded-[40px] p-6 md:p-8 shadow-sm text-left">
       <h3 className="font-bold text-gray-800 mb-6 text-base font-inter">Tipe Penjemputan Dokumen</h3>
@@ -33,14 +34,14 @@ export const PickupTypeCard = ({ onEditAddress }: PickupTypeCardProps) => {
           <h4 className="font-bold text-sm text-gray-800 font-inter">Lokasi Pengambilan Dokumen</h4>
         </div>
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-          <p className="text-[14px] text-gray-500 max-w-xl leading-relaxed font-medium font-inter">
-            Bukit Golf Mediterania, Cluster Royal Mansion, Blok Royal No. 5, PIK FIT, Pantai Indah Kapuk, Jakarta Utara
+          <p className={`text-[14px] max-w-xl leading-relaxed font-inter ${address ? 'text-gray-500 font-medium' : 'text-[#27AAE1] font-bold italic'}`}>
+            {address || 'Silakan masukkan alamat penjemputan dokumen Anda'}
           </p>
           <button 
             onClick={onEditAddress}
-            className="px-5 py-2 border border-gray-200 rounded-full text-[12px] font-bold text-gray-600 hover:bg-gray-50 transition-all font-inter"
+            className="px-5 py-2 border border-gray-200 rounded-full text-[12px] font-bold text-gray-600 hover:bg-gray-50 transition-all shrink-0 font-inter"
           >
-            Ubah Alamat
+            {address ? 'Ubah Alamat' : 'Input Alamat'}
           </button>
         </div>
       </div>

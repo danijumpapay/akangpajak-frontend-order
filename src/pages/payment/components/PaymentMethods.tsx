@@ -1,23 +1,29 @@
+interface PaymentMethod {
+  id: string;
+  name: string;
+  logo: string;
+}
+
 interface PaymentMethodsProps {
   selectedMethod: string;
   onSelect: (id: string) => void;
 }
 
 export const PaymentMethods = ({ selectedMethod, onSelect }: PaymentMethodsProps) => {
-  const instantPayments = [
+  const instantPayments: PaymentMethod[] = [
     { id: 'QRIS', name: 'QRIS', logo: '/payments/qris.svg' },
     { id: 'DANA', name: 'DANA', logo: '/payments/dana.svg' },
     { id: 'Gopay', name: 'Gopay', logo: '/payments/gopay.svg' },
     { id: 'OVO', name: 'OVO', logo: '/payments/ovo.svg' },
   ];
 
-  const bankTransfers = [
+  const bankTransfers: PaymentMethod[] = [
     { id: 'BCA', name: 'BCA', logo: '/payments/bca.svg' },
     { id: 'BNI', name: 'BNI', logo: '/payments/bni.svg' },
     { id: 'Permata', name: 'Permata Bank', logo: '/payments/permata.svg' },
   ];
 
-  const renderMethod = (method: any, isBank = false) => (
+  const renderMethod = (method: PaymentMethod, isBank = false) => (
     <div 
       key={method.id} 
       onClick={() => onSelect(method.id)}
