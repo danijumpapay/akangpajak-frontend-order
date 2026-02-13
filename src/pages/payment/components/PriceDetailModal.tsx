@@ -39,7 +39,7 @@ export const PriceDetailModal = ({ isOpen, onClose, items, total }: PriceDetailM
           <div className="bg-blue-50/50 p-4 rounded-2xl flex gap-3 items-start mb-2">
             <Info size={18} className="text-[#27AAE1] shrink-0 mt-0.5" />
             <p className="text-xs text-gray-600 leading-relaxed font-inter">
-              Harga yang tertera sudah termasuk pajak dan biaya penanganan resmi dari JumpaPay.
+              Harga yang tertera sudah termasuk pajak dan biaya penanganan resmi dari Akang Pajak.
             </p>
           </div>
 

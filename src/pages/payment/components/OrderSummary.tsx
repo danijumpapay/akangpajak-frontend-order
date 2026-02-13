@@ -69,7 +69,7 @@ export const OrderSummary = ({ serviceImage, serviceTitle, onPayClick }: OrderSu
     <div className="bg-white border border-gray-100 rounded-[32px] md:rounded-[40px] p-8 shadow-sm sticky top-8 text-left transition-all font-inter">
       <div className="flex justify-between items-center mb-6">
         <h3 className="font-bold text-gray-800 text-base">Detail Order</h3>
-        <button className="bg-[#27AAE1] text-white px-3 py-1.5 rounded-lg text-[10px] hover:bg-sky-500 font-extrabold tracking-wide transition-colors">
+        <button className="btn-akang-primary text-white px-3 py-1.5 rounded-lg text-[10px] font-extrabold tracking-wide transition-colors">
           Tambah Jasa
         </button>
       </div>
@@ -114,7 +114,7 @@ export const OrderSummary = ({ serviceImage, serviceTitle, onPayClick }: OrderSu
           {appliedVoucherType === 'NONE' ? (
             <button 
               onClick={handleApplyVoucher}
-              className="bg-[#27AAE1] text-white px-3 py-1.5 rounded-lg text-[10px] hover:bg-sky-500 font-extrabold tracking-wide transition-colors"
+              className="btn-akang-primary text-white px-3 py-1.5 rounded-lg text-[10px] font-extrabold tracking-wide transition-colors"
             >
               Apply
             </button>
@@ -173,7 +173,7 @@ export const OrderSummary = ({ serviceImage, serviceTitle, onPayClick }: OrderSu
 
       <button 
         onClick={handlePayNow}
-        className="w-full bg-[#27AAE1] text-white py-4 rounded-2xl font-extrabold text-base mt-8 shadow-lg shadow-sky-100 hover:bg-sky-500 transition-all active:scale-[0.98]"
+        className="btn-akang-primary w-full text-white py-4 rounded-2xl font-extrabold text-base mt-8 shadow-lg shadow-sky-100 transition-all active:scale-[0.98]"
       >
         Bayar Sekarang
       </button>

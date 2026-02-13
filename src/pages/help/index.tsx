@@ -12,7 +12,7 @@ export const HelpPage = () => {
       
       <div className="space-y-2 text-left">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Bantuan</h1>
-        <p className="text-sm text-gray-500">Ada kendala atau pertanyaan? Tim JumpaPay siap membantu kamu.</p>
+        <p className="text-sm text-gray-500">Ada kendala atau pertanyaan? Tim Akang Pajak siap membantu kamu.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
@@ -20,7 +20,7 @@ export const HelpPage = () => {
           <div className="rounded-[32px] md:rounded-[40px] overflow-hidden bg-sky-100 aspect-4/5 lg:h-120 shadow-sm">
             <img 
               src="/support/customer-service.png" 
-              alt="JumpaPay Support" 
+              alt="Akang Pajak Support" 
               className="w-full h-full object-cover"
             />
           </div>
@@ -28,14 +28,14 @@ export const HelpPage = () => {
 
         <div className="lg:col-span-7 space-y-4 md:space-y-6 order-2">
           <div className="grid grid-cols-3 gap-2 md:gap-4">
-            <ContactCard href="tel:628119509889" icon={Phone} label="Hubungi JumpaPay" variant="sky" />
-            <ContactCard href="https://wa.me/628119509889" icon={MessageCircle} label="Whatsapp JumpaPay" variant="green" />
-            <ContactCard href="mailto:info@jumpapay.com" icon={Mail} label="Email JumpaPay" variant="blue" />
+            <ContactCard href="tel:6281110139532" icon={Phone} label="Hubungi Akang Pajak" variant="sky" />
+            <ContactCard href="https://wa.me/6281110139532" icon={MessageCircle} label="Whatsapp Akang Pajak" variant="green" />
+            <ContactCard href="mailto:admin@akangpajak.com" icon={Mail} label="Email Akang Pajak" variant="blue" />
           </div>
 
           <Card className="rounded-[32px] border-gray-100 bg-gray-50/50 shadow-sm">
             <CardContent className="p-6 md:p-8 space-y-6">
-              <h3 className="text-base md:text-lg font-bold text-gray-800">Jam Operasional JumpaPay</h3>
+              <h3 className="text-base md:text-lg font-bold text-gray-800">Jam Operasional Akang Pajak</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 <div className="space-y-3">
                   <p className="text-xs md:text-[13px] font-bold text-gray-800 uppercase tracking-wider flex items-center gap-2">
@@ -79,7 +79,7 @@ export const HelpPage = () => {
       </div>
 
       <div className="space-y-6 pt-6 md:pt-8">
-        <h2 className="text-lg md:text-xl font-bold text-gray-900 leading-tight">Pertanyaan Seputar Layanan JumpaPay</h2>
+        <h2 className="text-lg md:text-xl font-bold text-gray-900 leading-tight">Pertanyaan Seputar Layanan Akang Pajak</h2>
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq) => (
             <AccordionItem 

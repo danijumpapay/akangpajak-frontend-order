@@ -1,42 +1,15 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @plugin "tailwindcss-animate";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-jumpapay-blue: #2AB0E5;
-  --color-jumpapay-dark: #1E293B;
+  --color-akang-pajak-blue: #02AEF7;
+  --color-akang-pajak-blue-2: #2267E1;
+  --color-akang-pajak-dark: #1E293B;
   --spacing-container: 1300px;
-}
-
-@layer base {
-  body {
-    @apply bg-slate-50 text-slate-900 antialiased;
-  }
-}
-
-.swiper {
-  display: block !important;
-  width: 100% !important;
-}
-
-.swiper-slide {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-pagination-bullet {
-  background: #2AB0E5 !important;
-  opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  width: 20px !important;
-  border-radius: 4px !important;
 }
 
 @theme inline {
@@ -153,7 +126,35 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-slate-50 text-slate-900 antialiased;
   }
+}
+
+.swiper {
+  display: block !important;
+  width: 100% !important;
+}
+
+.swiper-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  background: #FFFFFF !important;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #FFFFFF !important;
+  width: 20px !important;
+  border-radius: 4px !important;
+}
+
+.btn-akang-primary {
+  @apply bg-akang-pajak-blue hover:bg-akang-pajak-blue-2;
 }

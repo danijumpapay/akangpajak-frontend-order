@@ -3,12 +3,12 @@ import { FAQItem } from '../types';
 export const faqs: FAQItem[] = [
   {
     id: "faq-1",
-    question: "Di mana saja cakupan wilayah pengurusan surat kendaraan yang dilayani oleh JumpaPay?",
-    answer: "JumpaPay melayani pengurusan surat kendaraan dengan kode plat kendaraan B (Jadetabek)."
+    question: "Di mana saja cakupan wilayah pengurusan surat kendaraan yang dilayani oleh Akang Pajak?",
+    answer: "Akang Pajak melayani pengurusan surat kendaraan dengan kode plat kendaraan B (Jadetabek)."
   },
   {
     id: "faq-2",
-    question: "Layanan apa saja yang disediakan oleh JumpaPay?",
+    question: "Layanan apa saja yang disediakan oleh Akang Pajak?",
     answer: "Kami melayani perpanjangan STNK tahunan, lima tahunan, mutasi, balik nama, ganti plat, hingga pengurusan STNK hilang untuk kendaraan pribadi maupun perusahaan."
   },
   {
@@ -18,17 +18,17 @@ export const faqs: FAQItem[] = [
   },
   {
     id: "faq-4",
-    question: "Apa saja persyaratan dokumen administrasi dalam pengurusan surat kendaraan melalui JumpaPay?",
+    question: "Apa saja persyaratan dokumen administrasi dalam pengurusan surat kendaraan melalui Akang Pajak?",
     answer: "Umumnya diperlukan KTP asli pemilik kendaraan, STNK asli, dan BPKB asli (untuk layanan tertentu seperti ganti plat atau mutasi). Tim kami akan menginformasikan detailnya saat Anda melakukan pemesanan."
   },
   {
     id: "faq-5",
-    question: "Berapa biaya antar-jemput dokumen yang dikenakan JumpaPay?",
-    answer: "Biaya antar-jemput dokumen sudah termasuk ke dalam paket layanan yang Anda pilih di aplikasi JumpaPay, sehingga tidak ada biaya tambahan untuk kurir kami."
+    question: "Berapa biaya antar-jemput dokumen yang dikenakan Akang Pajak?",
+    answer: "Biaya antar-jemput dokumen sudah termasuk ke dalam paket layanan yang Anda pilih di aplikasi Akang Pajak, sehingga tidak ada biaya tambahan untuk kurir kami."
   },
   {
     id: "faq-6",
-    question: "Apakah JumpaPay melayani pengurusan kendaraan perusahaan selain perorangan?",
+    question: "Apakah Akang Pajak melayani pengurusan kendaraan perusahaan selain perorangan?",
     answer: "Ya, kami melayani pengurusan surat kendaraan baik untuk perorangan maupun aset perusahaan dengan skala armada besar."
   }
 ];

@@ -71,7 +71,7 @@ export const DocumentUploadPage = () => {
           }}
           className={`w-full py-5 rounded-[24px] font-black text-lg mt-10 transition-all flex items-center justify-center gap-3 ${
             isAllUploaded 
-            ? 'bg-[#27AAE1] text-white shadow-lg shadow-sky-100 hover:bg-sky-500 active:scale-95' 
+            ? 'btn-akang-primary text-white shadow-lg shadow-sky-100 active:scale-95' 
             : 'bg-gray-100 text-gray-400 cursor-not-allowed'
           }`}
         >

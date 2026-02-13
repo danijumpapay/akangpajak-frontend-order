@@ -42,7 +42,7 @@ export const PaymentSuccessPage = () => {
         <div className="space-y-3 pt-4">
           <button 
             onClick={handleGoToTracking}
-            className="w-full bg-[#27AAE1] text-white py-4 rounded-2xl font-extrabold text-sm shadow-lg shadow-sky-100 hover:bg-sky-500 transition-all flex items-center justify-center gap-2 group"
+            className="btn-akang-primary w-full text-white py-4 rounded-2xl font-extrabold text-sm shadow-lg shadow-sky-100transition-all flex items-center justify-center gap-2 group"
           >
             Cek Status Pesanan 
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -56,7 +56,7 @@ export const PaymentSuccessPage = () => {
 
       <div className="text-center">
         <p className="text-xs text-gray-400 font-medium italic">
-          Butuh bantuan? Hubungi WhatsApp JumpaPay <span className="text-[#27AAE1] cursor-pointer not-italic font-bold">0811-9509-889</span>
+          Butuh bantuan? Hubungi WhatsApp Akang Pajak <span className="text-[#27AAE1] cursor-pointer not-italic font-bold">0811-9509-889</span>
         </p>
       </div>
     </div>

@@ -19,7 +19,7 @@ interface PromoContent {
 
 const PROMO_DATA: Record<string, PromoContent> = {
   "planet-ban": {
-    title: "Syarat & Ketentuan Promo Planet Ban x JumpaPay",
+    title: "Syarat & Ketentuan Promo Planet Ban x Akang Pajak",
     bannerImg: "/banners/promo-planet-ban.png",
     badge: "Voucher Rp20.000",
     expiry: "Masa Aktif: 90 Hari setelah order",
@@ -29,7 +29,7 @@ const PROMO_DATA: Record<string, PromoContent> = {
         icon: <Tag size={18} />,
         items: [
           "Pelanggan berhak mendapatkan Voucher Belanja Planet Ban dengan nilai maksimal Rp20.000.",
-          "Voucher hanya akan diberikan setelah pelanggan berhasil menyelesaikan order/transaksi melalui platform atau layanan JumpaPay.",
+          "Voucher hanya akan diberikan setelah pelanggan berhasil menyelesaikan order/transaksi melalui platform atau layanan Akang Pajak.",
         ]
       },
       {
@@ -44,9 +44,9 @@ const PROMO_DATA: Record<string, PromoContent> = {
       }
     ]
   },
-  "jumpapay-special": {
-    title: "Syarat & Ketentuan Promo Spesial Pengguna Baru JumpaPay",
-    bannerImg: "https://placehold.co/1300x308/2AB0E5/white?text=Promo+JumpaPay",
+  "Akang Pajak-special": {
+    title: "Syarat & Ketentuan Promo Spesial Pengguna Baru Akang Pajak",
+    bannerImg: "/banners/promo-akang-pajak-ongkir.png",
     badge: "Potongan Rp50.000",
     expiry: "Hingga 31 Des 2026",
     sections: [
@@ -54,7 +54,7 @@ const PROMO_DATA: Record<string, PromoContent> = {
         title: "Mekanisme Program",
         icon: <Tag size={18} />,
         items: [
-          "Promo khusus untuk transaksi pertama di platform JumpaPay.",
+          "Promo khusus untuk transaksi pertama di platform Akang Pajak.",
           "Potongan harga otomatis didapatkan saat memilih layanan STNK atau Pajak.",
           "Berlaku untuk semua jenis kendaraan roda dua dan roda empat."
         ]
@@ -66,7 +66,7 @@ const PROMO_DATA: Record<string, PromoContent> = {
           "Minimum transaksi untuk mendapatkan potongan adalah Rp200.000.",
           "Promo hanya dapat digunakan 1 kali per nomor WhatsApp/Email.",
           "Tidak dapat digabungkan dengan promo voucher lainnya.",
-          "Keputusan JumpaPay mengenai keabsahan transaksi bersifat mutlak."
+          "Keputusan Akang Pajak mengenai keabsahan transaksi bersifat mutlak."
         ]
       }
     ]
@@ -82,21 +82,17 @@ export const PromoDetailPage = () => {
   }, [selectedPromoId]);
 
   return (
-    <div className="max-w-3xl mx-auto md:py-8 space-y-8 font-inter animate-in fade-in duration-500 text-left">
+    <div className="mx-auto md:py-8 space-y-8 font-inter animate-in fade-in duration-500 text-left">
       <div className="px-4 md:px-0">
         <Breadcrumbs currentPage="Detail Promo" onParentClick={() => setView('order')} />
       </div>
 
-      <div className="relative rounded-[32px] md:rounded-[40px] overflow-hidden aspect-video md:aspect-21/9 shadow-lg mx-4 md:mx-0">
+      <div className="relative rounded-[32px] md:rounded-[40px] overflow-hidden shadow-lg mx-4 md:mx-0">
         <img 
           src={content.bannerImg} 
           alt={content.title} 
           className="object-cover w-full h-full"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-10">
-          <span className="text-sky-400 font-black text-[10px] uppercase tracking-[0.2em] mb-2">Exclusive Promo</span>
-          <h1 className="text-white text-2xl md:text-4xl font-black leading-tight">{content.title}</h1>
-        </div>
       </div>
 
       <div className="px-4 md:px-0 space-y-10">

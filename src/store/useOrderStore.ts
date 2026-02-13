@@ -93,7 +93,7 @@ export const useOrderStore = create<OrderState>()(
         }),
     }),
     {
-      name: 'jumpapay-order-storage',
+      name: 'AkangPajak-order-storage',
       partialize: (state) => ({
         ...state,
         orderData: {

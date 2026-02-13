@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        jumpapay: {
-          blue: '#27AAE1',
+        AkangPajak: {
+          blue: '#2267E1',
           dark: '#1f89b6',
         },
       }

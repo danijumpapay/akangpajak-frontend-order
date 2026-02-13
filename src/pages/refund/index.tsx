@@ -126,7 +126,7 @@ export const RefundPage = () => {
 
         <aside className="space-y-6 text-left">
           <Card className="rounded-3xl border-none bg-blue-50/50 p-6">
-            <h4 className="font-bold text-jumpapay-blue mb-3 flex items-center gap-2">
+            <h4 className="font-bold text-akang-pajak-blue mb-3 flex items-center gap-2">
               <Info size={18} /> Informasi Refund
             </h4>
             <ul className="text-xs text-gray-600 space-y-3 list-disc ml-4 font-medium leading-relaxed">

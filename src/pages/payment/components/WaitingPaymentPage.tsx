@@ -151,7 +151,7 @@ export const WaitingPaymentPage = () => {
           <button 
             onClick={() => setStep(5)}
             disabled={timeLeft <= 0}
-            className="w-full bg-[#27AAE1] text-white py-4 rounded-2xl font-extrabold text-sm shadow-lg shadow-sky-100 hover:bg-sky-500 transition-all disabled:bg-gray-300"
+            className="btn-akang-primary w-full text-white py-4 rounded-2xl font-extrabold text-sm shadow-lg shadow-sky-100 transition-all disabled:bg-gray-300"
           >
             Saya Sudah Bayar
           </button>

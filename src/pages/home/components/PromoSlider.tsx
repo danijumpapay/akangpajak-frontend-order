@@ -7,15 +7,15 @@ import 'swiper/css/pagination';
 
 const PROMO_BANNERS = [
   { 
-    id: 'planet-ban', 
-    img: '/banners/promo-planet-ban.png', 
-    alt: 'Promo Planet Ban',
+    id: 'AkangPajak-special', 
+    img: '/banners/promo-akang-pajak-ongkir.png', 
+    alt: 'Promo Akang Pajak',
     target: 'promo-detail'
   },
   { 
-    id: 'jumpapay-special', 
-    img: 'https://placehold.co/1300x308/2AB0E5/white?text=Promo+JumpaPay', 
-    alt: 'Promo JumpaPay',
+    id: 'planet-ban', 
+    img: '/banners/promo-planet-ban.png', 
+    alt: 'Promo Planet Ban',
     target: 'promo-detail'
   },
 ];
@@ -50,7 +50,7 @@ export const PromoSlider = () => {
               <img 
                 src={banner.img} 
                 alt={banner.alt} 
-                className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-700"
               />
             </div>
           </SwiperSlide>
@@ -59,12 +59,12 @@ export const PromoSlider = () => {
 
       <style>{`
         .promo-swiper .swiper-pagination-bullet-active {
-          background: #27AAE1 !important;
+          background: #FFFFFF !important;
           width: 20px !important;
           border-radius: 5px !important;
         }
         .promo-swiper .swiper-pagination-bullet {
-          background: #27AAE1;
+          background: #FFFFFF;
           opacity: 0.5;
         }
         .promo-swiper .swiper-pagination {

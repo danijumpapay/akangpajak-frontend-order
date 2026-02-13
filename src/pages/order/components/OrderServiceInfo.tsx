@@ -32,7 +32,7 @@ export const OrderServiceInfo = ({ title, image, description }: OrderServiceInfo
           <h3 className="font-bold text-gray-800 mb-3 text-sm md:text-base">Deskripsi:</h3>
           <div className={`text-gray-600 leading-relaxed text-sm transition-all duration-300 ${showFullDetail ? '' : 'line-clamp-3'}`}>
             {description || 
-            `Apakah kamu ingin pindah kota dan perlu untuk mutasi STNK agar kendaraan kamu juga bisa ganti nomor sesuai kotamu? Jumpapay untuk bantu kamu urus proses Mutasi STNK. Kamu nggak perlu lagi bolak-balik cuma untuk urus administrasi berkas.`}
+            `Apakah kamu ingin pindah kota dan perlu untuk mutasi STNK agar kendaraan kamu juga bisa ganti nomor sesuai kotamu? Akang Pajak untuk bantu kamu urus proses Mutasi STNK. Kamu nggak perlu lagi bolak-balik cuma untuk urus administrasi berkas.`}
           </div>
           
           <Button 

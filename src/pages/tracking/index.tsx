@@ -153,7 +153,7 @@ export const TrackingPage = () => {
               <Button 
                 onClick={() => setView('refund')} 
                 variant="outline" 
-                className="w-full h-14 rounded-full border-2 border-jumpapay-blue text-jumpapay-blue font-bold transition-all hover:bg-jumpapay-blue hover:text-white hover:shadow-md"
+                className="w-full h-14 rounded-full border-2 border-akang-pajak-blue text-akang-pajak-blue font-bold transition-all hover:bg-akang-pajak-blue hover:text-white hover:shadow-md"
               >
                 Ajukan Pembatalan / Refund
               </Button>

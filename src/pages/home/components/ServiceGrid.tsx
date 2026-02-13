@@ -1,13 +1,6 @@
 import { useOrderStore } from '../../../store/useOrderStore';
 import { HelpCircle } from 'lucide-react';
-
-const SERVICES = [
-  { id: '1', title: 'Mutasi STNK', price: 150000, image: '/services/mutasi.png' },
-  { id: '2', title: 'Urus STNK Tahunan', price: 40000, image: '/services/tahunan.png' },
-  { id: '3', title: 'Urus STNK 5 Tahun', price: 50000, image: '/services/5tahun.png' },
-  { id: '4', title: 'Balik Nama', price: 200000, image: '/services/balik-nama.png' },
-  { id: '5', title: 'Blokir Nomor Plat', price: 150000, image: '/services/blokir.png' },
-];
+import SERVICES from '@/data/services.json';
 
 export const ServiceGrid = () => {
   const setService = useOrderStore((s) => s.setService);
@@ -27,7 +20,7 @@ export const ServiceGrid = () => {
         </button>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+      <div className="grid grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
         {SERVICES.map((item) => (
           <div 
             key={item.id}
@@ -45,7 +38,7 @@ export const ServiceGrid = () => {
               <h3 className="font-bold text-gray-800 text-sm md:text-base leading-tight">{item.title}</h3>
               <div className="mt-2 flex flex-col">
                 <span className="text-[10px] text-gray-400 uppercase font-bold tracking-tighter">Mulai dari</span>
-                <span className="font-bold text-jumpapay-blue text-xs md:text-sm">
+                <span className="font-bold text-akang-pajak-blue text-xs md:text-sm">
                   Rp{item.price.toLocaleString('id-ID')}
                 </span>
               </div>
