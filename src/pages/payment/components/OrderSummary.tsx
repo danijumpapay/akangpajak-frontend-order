@@ -17,7 +17,7 @@ export const OrderSummary = ({ serviceImage, serviceTitle, onPayClick }: OrderSu
   const [voucherError, setVoucherError] = useState(false);
 
   const baseSubtotal = 2651000;
-  const originalPickupFee = 50000;
+  const originalPickupFee = 20000;
   
   const isOngkirVoucher = appliedVoucherType === 'ONGKIR';
   const isDiscountVoucher = appliedVoucherType === 'DISCOUNT';

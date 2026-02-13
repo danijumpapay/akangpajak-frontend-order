@@ -34,6 +34,7 @@ export const OrderForm = () => {
     resolver: zodResolver(orderSchema),
     defaultValues: {
       ...orderData,
+      jenisMutasi: orderData.jenisMutasi || 'Lengkap',
     }
   });
 
@@ -78,7 +79,10 @@ export const OrderForm = () => {
                     </div>
                   ) : field.type === 'select' ? (
                     <Select 
-                      onValueChange={(val) => { setValue(field.id, val); trigger(field.id); }} 
+                      onValueChange={(val) => { 
+                        setValue(field.id, val as OrderFormData[keyof OrderFormData]); 
+                        trigger(field.id); 
+                      }} 
                       defaultValue={orderData[field.id] as string}
                     >
                       <SelectTrigger className={`${inputStyles} ${error ? 'border-red-500' : ''}`}>
@@ -92,15 +96,18 @@ export const OrderForm = () => {
                     </Select>
                   ) : field.type === 'radio' ? (
                     <RadioGroup 
-                      value={(watchValues[field.id] as string)} 
-                      onValueChange={(val) => { setValue(field.id, val); trigger(field.id); }} 
+                      value={(watchValues[field.id] as string) || ''} 
+                      onValueChange={(val) => { 
+                        setValue(field.id, val as OrderFormData[keyof OrderFormData]); 
+                        trigger(field.id); 
+                      }} 
                       className="flex gap-2"
                     >
                       {field.options?.map((val) => (
                         <div key={val} className="flex-1">
-                          <RadioGroupItem value={val} id={val} className="sr-only" />
+                          <RadioGroupItem value={val} id={`${field.id}-${val}`} className="sr-only" />
                           <Label
-                            htmlFor={val}
+                            htmlFor={`${field.id}-${val}`}
                             className={`block py-2.5 text-center rounded-xl border cursor-pointer text-xs font-bold transition-all
                               ${watchValues[field.id] === val ? 'bg-[#E0F4FF] border-[#27AAE1] text-[#27AAE1]' : 'bg-gray-100 border-gray-100 text-gray-400'}
                               ${error ? 'border-red-500' : ''}`}

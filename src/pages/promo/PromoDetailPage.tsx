@@ -47,7 +47,7 @@ const PROMO_DATA: Record<string, PromoContent> = {
   "Akang Pajak-special": {
     title: "Syarat & Ketentuan Promo Spesial Pengguna Baru Akang Pajak",
     bannerImg: "/banners/promo-akang-pajak-ongkir.png",
-    badge: "Potongan Rp50.000",
+    badge: "Potongan Rp20.000",
     expiry: "Hingga 31 Des 2026",
     sections: [
       {

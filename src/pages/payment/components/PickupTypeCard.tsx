@@ -22,7 +22,7 @@ export const PickupTypeCard = ({ address, onEditAddress }: PickupTypeCardProps) 
             </div>
             <div>
               <p className="text-[16px] text-gray-800 font-bold leading-tight font-inter">Dokumen Dijemput</p>
-              <p className="text-[16px] font-bold text-gray-800 mt-1 font-inter">Rp50.000</p>
+              <p className="text-[16px] font-bold text-gray-800 mt-1 font-inter">Rp20.000</p>
             </div>
           </div>
         </div>
