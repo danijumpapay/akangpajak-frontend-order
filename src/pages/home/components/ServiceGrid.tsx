@@ -21,30 +21,39 @@ export const ServiceGrid = () => {
       </div>
       
       <div className="grid grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
-        {SERVICES.map((item) => (
-          <div 
-            key={item.id}
-            onClick={() => setService(item)}
-            className="bg-white rounded-2xl overflow-hidden cursor-pointer group transition-all"
-          >
-            <div className="aspect-square rounded-2xl overflow-hidden">
-               <img 
-                 src={item.image}
-                 alt={item.title} 
-                 className="w-full h-full object-cover transition-transform group-hover:scale-110" 
-               />
+        {SERVICES.map((item) => {
+          const isActive = item.id === "1" || item.id === "2";
+          
+          return (
+            <div 
+              key={item.id}
+              onClick={() => isActive && setService(item)}
+              className={`bg-white rounded-2xl overflow-hidden transition-all group ${
+                isActive 
+                  ? 'cursor-pointer' 
+                  : 'cursor-not-allowed opacity-60'
+              }`}
+            >
+              <div className={`aspect-square rounded-2xl overflow-hidden ${!isActive && 'grayscale'}`}>
+                <img 
+                  src={item.image}
+                  alt={item.title} 
+                  className={`w-full h-full object-cover transition-transform ${isActive && 'group-hover:scale-110'}`} 
+                />
+              </div>
+              <div className="pt-3 px-1 space-y-1">
+                <h3 className={`font-bold text-sm md:text-base leading-tight ${isActive ? 'text-gray-800' : 'text-gray-400'}`}>
+                  {item.title}
+                </h3>
+                {!isActive && (
+                  <p className="text-[10px] font-extrabold text-[#27AAE1] uppercase tracking-wider">
+                    Segera Hadir
+                  </p>
+                )}
+              </div>
             </div>
-            <div className="pt-3 px-1">
-              <h3 className="font-bold text-gray-800 text-sm md:text-base leading-tight">{item.title}</h3>
-              {/* <div className="mt-2 flex flex-col">
-                <span className="text-[10px] text-gray-400 uppercase font-bold tracking-tighter">Mulai dari</span>
-                <span className="font-bold text-akang-pajak-blue text-xs md:text-sm">
-                  Rp{item.price.toLocaleString('id-ID')}
-                </span>
-              </div> */}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
