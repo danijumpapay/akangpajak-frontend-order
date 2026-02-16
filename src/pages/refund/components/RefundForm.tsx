@@ -78,7 +78,7 @@ export const RefundForm = ({
               <SelectValue placeholder="Pilih bank yang dituju" />
             </SelectTrigger>
             <SelectContent className="rounded-xl min-w-(--radix-select-trigger-width)">
-              <SelectItem value="bca">BJB</SelectItem>
+              <SelectItem value="bjb">BJB</SelectItem>
               <SelectItem value="bca">BCA</SelectItem>
               <SelectItem value="bni">BNI</SelectItem>
             </SelectContent>
