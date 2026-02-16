@@ -46,7 +46,7 @@ export const RefundForm = ({
              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400">Rp</span>
              <Input 
               disabled 
-              value="1.200.000" 
+              value="345.600" 
               className="pl-10 bg-gray-50 border-gray-100 rounded-2xl h-12 cursor-not-allowed font-medium mt-2"
             />
           </div>
@@ -78,9 +78,9 @@ export const RefundForm = ({
               <SelectValue placeholder="Pilih bank yang dituju" />
             </SelectTrigger>
             <SelectContent className="rounded-xl min-w-(--radix-select-trigger-width)">
+              <SelectItem value="bca">BJB</SelectItem>
               <SelectItem value="bca">BCA</SelectItem>
               <SelectItem value="bni">BNI</SelectItem>
-              <SelectItem value="permata">Permata Bank</SelectItem>
             </SelectContent>
           </Select>
           {errors.bank && <p className="text-[11px] text-red-500 font-medium ml-1">{errors.bank}</p>}
