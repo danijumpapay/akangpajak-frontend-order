@@ -130,7 +130,7 @@ export const RefundPage = () => {
               <Info size={18} /> Informasi Refund
             </h4>
             <ul className="text-xs text-gray-600 space-y-3 list-disc ml-4 font-medium leading-relaxed">
-              <li>Proses verifikasi refund membutuhkan waktu maksimal 24 jam kerja.</li>
+              <li>Proses verifikasi refund membutuhkan waktu maksimal 24 jam hari kerja.</li>
               <li>Dana akan ditransfer dalam 5 hari kerja setelah pengajuan disetujui.</li>
               <li>Pastikan data rekening bank sudah sesuai untuk menghindari keterlambatan.</li>
             </ul>
