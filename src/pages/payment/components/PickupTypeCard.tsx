@@ -10,6 +10,7 @@ interface PickupTypeCardProps {
   onFeeChange: (fee: number) => void;
   vehicleType: string;
   region: string;
+  onValidationChange?: (isValid: boolean) => void;
 }
 
 const COVERED_CITIES = [
@@ -18,7 +19,7 @@ const COVERED_CITIES = [
   'Kota Depok'
 ];
 
-export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleType, region }: PickupTypeCardProps) => {
+export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleType, region, onValidationChange }: PickupTypeCardProps) => {
   const [selectedCity, setSelectedCity] = useState(COVERED_CITIES[0]);
   const [isManualCity, setIsManualCity] = useState(false);
   const [manualCity, setManualCity] = useState('');
@@ -83,6 +84,15 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
     };
   }, [wrapperRef]);
 
+  /* ... inside PickupTypeCard component ... */
+  useEffect(() => {
+    // Report validity to parent
+    // Valid if not manual mode OR (manual mode AND input not empty)
+    const isValid = !isManualCity || (isManualCity && manualCity.trim().length > 0);
+    // You need to add onValidationChange to props interface first!
+    onValidationChange?.(isValid);
+  }, [isManualCity, manualCity, onValidationChange]);
+
   const handleCityChange = (val: string) => {
     if (val === 'others') {
       setIsManualCity(true);
@@ -99,6 +109,7 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
   const handleManualCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setManualCity(val);
+    /* ... rest of function ... */
 
     if (val.length > 0) {
       const filtered = westJavaCities.filter(city =>

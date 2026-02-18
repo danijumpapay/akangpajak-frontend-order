@@ -9,16 +9,18 @@ interface OrderSummaryProps {
   serviceTitle?: string;
   deliveryFee: number;
   address?: string;
+  isDetailValid?: boolean;
   onPayClick?: () => void;
 }
 
-export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address, onPayClick }: OrderSummaryProps) => {
+export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address, onPayClick, isDetailValid = true }: OrderSummaryProps) => {
   const { setStep, setOrderId, orderData, setOrderData } = useOrderStore();
   const [isPriceModalOpen, setIsPriceModalOpen] = useState(false);
   const [voucherCode, setVoucherCode] = useState('');
   const [appliedVoucherType, setAppliedVoucherType] = useState<'NONE' | 'DISCOUNT' | 'ONGKIR'>('NONE');
   const [voucherError, setVoucherError] = useState(false);
   const [addressError, setAddressError] = useState(false);
+  const [detailError, setDetailError] = useState(false);
 
   const baseSubtotal = 345600;
   const adminFee = 10000;
@@ -50,12 +52,22 @@ export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address,
   };
 
   const handlePayNow = () => {
+    // Reset errors first
+    setAddressError(false);
+    setDetailError(false);
+
     const isAddressMissing = !address ||
       address.trim() === '' ||
       address.toLowerCase().includes('belum ada alamat');
 
     if (deliveryFee > 0 && isAddressMissing) {
       setAddressError(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (!isDetailValid) {
+      setDetailError(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -200,6 +212,15 @@ export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address,
           <AlertCircle className="text-red-500 shrink-0" size={18} />
           <p className="text-[11px] font-bold text-red-600 leading-tight">
             Alamat pengantaran belum diisi. Silakan lengkapi lokasi pengantaran dokumen terlebih dahulu.
+          </p>
+        </div>
+      )}
+
+      {detailError && (
+        <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
+          <AlertCircle className="text-red-500 shrink-0" size={18} />
+          <p className="text-[11px] font-bold text-red-600 leading-tight">
+            Detail pengiriman belum lengkap. Mohon isi kota/kabupaten tujuan pengiriman dokumen.
           </p>
         </div>
       )}

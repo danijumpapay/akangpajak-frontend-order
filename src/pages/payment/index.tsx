@@ -13,6 +13,7 @@ export const PaymentPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState('BJB');
   const [deliveryFee, setDeliveryFee] = useState(29900);
+  const [isDetailValid, setIsDetailValid] = useState(true);
 
   const [addressData, setAddressData] = useState<AddressData>({
     alamatLengkap: '',
@@ -64,6 +65,7 @@ export const PaymentPage = () => {
             onFeeChange={setDeliveryFee}
             vehicleType={vehicleData.type}
             region={vehicleData.region}
+            onValidationChange={setIsDetailValid}
           />
           <PaymentMethods
             selectedMethod={selectedMethod}
@@ -77,6 +79,7 @@ export const PaymentPage = () => {
             serviceTitle={selectedService?.title}
             deliveryFee={deliveryFee}
             address={displayAddress}
+            isDetailValid={isDetailValid}
             onPayClick={() => setStep(4)}
           />
         </div>
