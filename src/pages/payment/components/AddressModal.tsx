@@ -56,7 +56,6 @@ export const AddressModal = ({ isOpen, onClose, initialData, onSave }: AddressMo
   const validate = () => {
     const newErrors: Partial<Record<keyof AddressData, string>> = {};
     if (!formData.alamatLengkap.trim()) newErrors.alamatLengkap = "Alamat lengkap wajib diisi";
-    if (!formData.keterangan.trim()) newErrors.keterangan = "Keterangan tambahan wajib diisi";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -130,7 +129,7 @@ export const AddressModal = ({ isOpen, onClose, initialData, onSave }: AddressMo
             </div>
 
             <div className="space-y-1">
-              <TooltipLabel label="Keterangan Tambahan" info="Contoh: Rumah Hook, warna hijau, pagar hitam" />
+              <TooltipLabel label="Keterangan Tambahan (Opsional)" info="Contoh: Rumah Hook, warna hijau, pagar hitam" />
               <textarea rows={2} value={formData.keterangan} onChange={(e) => handleChange('keterangan', e.target.value)} className={`w-full bg-gray-50 border ${errors.keterangan ? 'border-red-500' : 'border-gray-100'} rounded-xl p-3.5 text-sm focus:outline-none focus:border-[#27AAE1] transition-all resize-none mt-2 font-inter`} />
               {errors.keterangan && <p className="text-[10px] text-red-500 font-bold mt-1 ml-1">{errors.keterangan}</p>}
             </div>
