@@ -83,13 +83,8 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [wrapperRef]);
-
-  /* ... inside PickupTypeCard component ... */
   useEffect(() => {
-    // Report validity to parent
-    // Valid if not manual mode OR (manual mode AND input not empty)
     const isValid = !isManualCity || (isManualCity && manualCity.trim().length > 0);
-    // You need to add onValidationChange to props interface first!
     onValidationChange?.(isValid);
   }, [isManualCity, manualCity, onValidationChange]);
 
@@ -109,8 +104,6 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
   const handleManualCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setManualCity(val);
-    /* ... rest of function ... */
-
     if (val.length > 0) {
       const filtered = westJavaCities.filter(city =>
         city.toLowerCase().includes(val.toLowerCase())

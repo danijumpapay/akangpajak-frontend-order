@@ -52,7 +52,6 @@ export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address,
   };
 
   const handlePayNow = () => {
-    // Reset errors first
     setAddressError(false);
     setDetailError(false);
 
