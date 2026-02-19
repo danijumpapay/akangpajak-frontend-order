@@ -9,9 +9,11 @@ interface AddressModalProps {
   onSave: (newData: AddressData) => void;
 }
 
-const TooltipLabel = ({ label, info }: { label: string; info: string }) => (
+const TooltipLabel = ({ label, info, required }: { label: string; info: string; required?: boolean }) => (
   <div className="flex items-center gap-2 ml-1 group relative">
-    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</label>
+    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
     <div className="relative">
       <Info size={14} className="text-gray-300 cursor-help hover:text-[#27AAE1] transition-colors" />
       <div className="absolute top-full left-0 mt-2 hidden group-hover:block w-64 p-3 bg-gray-800 text-white text-[10px] rounded-lg shadow-xl z-110 leading-relaxed animate-in fade-in zoom-in duration-200">
@@ -123,7 +125,7 @@ export const AddressModal = ({ isOpen, onClose, initialData, onSave }: AddressMo
 
           <div className="space-y-4 pt-2 border-t border-dashed border-gray-100">
             <div className="space-y-1">
-              <TooltipLabel label="Alamat Lengkap" info="Contoh: Perumahan Mahkota Mas Blok O4 RT 002/RW 009 Kec Cidadap" />
+              <TooltipLabel label="Alamat Lengkap" required info="Contoh: Perumahan Mahkota Mas Blok O4 RT 002/RW 009 Kec Cidadap" />
               <textarea rows={3} value={formData.alamatLengkap} onChange={(e) => handleChange('alamatLengkap', e.target.value)} className={`w-full bg-gray-50 border ${errors.alamatLengkap ? 'border-red-500' : 'border-gray-100'} rounded-xl p-3.5 text-sm focus:outline-none focus:border-[#27AAE1] transition-all resize-none mt-2 font-inter`} />
               {errors.alamatLengkap && <p className="text-[10px] text-red-500 font-bold mt-1 ml-1">{errors.alamatLengkap}</p>}
             </div>

@@ -122,7 +122,7 @@ export const OrderForm = () => {
                 return (
                   <div key={String(fieldId)} className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <Label className="text-sm font-bold text-gray-800">{field.label}</Label>
+                      <Label className="text-sm font-bold text-gray-800">{field.label} {field.required && <span className="text-red-500">*</span>}</Label>
                       {field.info && (
                         <Tooltip>
                           <TooltipTrigger asChild type="button">

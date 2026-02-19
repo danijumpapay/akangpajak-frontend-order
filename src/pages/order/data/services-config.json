@@ -11,13 +11,14 @@
       "label": "Email",
       "info": "Digunakan untuk mengirim invoice pembayaran",
       "type": "email",
-      "required": true
+      "required": false
     },
     {
       "id": "whatsapp",
       "label": "Nomor WhatsApp",
-      "info": "Contoh: 88212345678 (langsung angka setelah 0)",
-      "type": "tel"
+      "info": "Contoh: 88212345678 (Tanpa angka 0)",
+      "type": "tel",
+      "required": true
     },
     {
       "id": "nik",
