@@ -7,9 +7,10 @@ import { PickupTypeCard } from './components/PickupTypeCard';
 import { PaymentMethods } from './components/PaymentMethods';
 import { OrderSummary } from './components/OrderSummary';
 import { AddressData } from '@/types/payment';
+import { getVehicleType } from '@/lib/order-utils';
 
 export const PaymentPage = () => {
-  const { selectedService, setStep } = useOrderStore();
+  const { selectedService, setStep, orderData } = useOrderStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState('BJB');
   const [deliveryFee, setDeliveryFee] = useState(29900);
@@ -29,16 +30,18 @@ export const PaymentPage = () => {
     ? `${addressData.alamatLengkap}, ${addressData.kota}`
     : 'Belum ada alamat ditetapkan';
 
+  const apiData = orderData.apiVehicleData;
+
   const vehicleData = {
-    plateNumber: "D 3130 ADT",
-    brand: "HONDA",
-    model: "F1C02N46L0 A/T",
-    color: "PUTIH",
-    year: "2022",
-    chassisNumber: "MH1JM0217NK743811",
-    taxValidity: "18-05-2026",
-    type: "Motor",
-    region: "Bandung II KWLYN"
+    plateNumber: apiData?.NO_POLISI || orderData.plateNumber || '-',
+    brand: apiData?.NM_MEREK_KB || '-',
+    model: apiData?.NM_MODEL_KB || '-',
+    color: apiData?.WARNA_KB || '-',
+    year: apiData?.THN_BUAT || '-',
+    chassisNumber: apiData?.NO_RANGKA || '-',
+    taxValidity: apiData?.TGL_AKHIR_PAJAK || '-',
+    type: getVehicleType(apiData?.SWD_POKOK),
+    region: apiData?.WILAYAH_SAMSAT || '-'
   };
 
   return (

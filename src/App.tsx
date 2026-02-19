@@ -11,9 +11,10 @@ import { HelpPage } from './pages/help';
 import { TutorialPage } from './pages/tutorial';
 import { useOrderStore } from './store/useOrderStore';
 import { Home, Search, Video, HelpCircle } from 'lucide-react';
+import { Toaster } from 'sonner';
 
 function App() {
-  const { step, view, setView, setStep, setOrderId } = useOrderStore(); 
+  const { step, view, setView, setStep, setOrderId } = useOrderStore();
 
   const renderContent = () => {
     if (view === 'promo-detail') return <PromoDetailPage />;
@@ -41,6 +42,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
+      <Toaster position="top-center" richColors />
       <Navbar />
 
       <main className="grow max-w-7xl mx-auto w-full px-4 md:px-10 lg:px-16">
@@ -49,7 +51,7 @@ function App() {
 
       <footer className="w-full py-10 pb-40 md:pb-12 border-t border-gray-50 bg-white font-inter">
         <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
-          
+
           <div className="order-2 md:order-1">
             <p className="text-[10px] md:text-xs text-gray-400 font-medium">
               © {new Date().getFullYear()} Akang Pajak. All Rights Reserved.
@@ -61,14 +63,14 @@ function App() {
               Mitra Resmi
             </p>
             <div className="h-4 w-px bg-gray-200 hidden md:block mt-4"></div>
-            <img 
-              src="/logo-bapenda-jabar.png" 
-              alt="Bapenda Jabar" 
-              className="h-8 md:h-8 w-auto grayscale-0 opacity-100 transition-all duration-500 object-contain mt-5" 
+            <img
+              src="/logo-bapenda-jabar.png"
+              alt="Bapenda Jabar"
+              className="h-8 md:h-8 w-auto grayscale-0 opacity-100 transition-all duration-500 object-contain mt-5"
             />
-            <img 
-              src="/payments/bjb.svg" 
-              alt="Bank BJB" 
+            <img
+              src="/payments/bjb.svg"
+              alt="Bank BJB"
               className="h-8 md:h-8 w-auto grayscale-0 opacity-100 transition-all duration-500 object-contain"
             />
           </div>
@@ -84,7 +86,7 @@ function App() {
           <span className="text-[10px] font-semibold font-inter">Home</span>
         </button>
 
-        <button 
+        <button
           onClick={() => handleNavClick('tracking')}
           className={`flex flex-col items-center gap-1 ${view === 'tracking' || view === 'refund' ? 'text-[#27AAE1]' : 'text-gray-400'}`}
         >
@@ -92,7 +94,7 @@ function App() {
           <span className="text-[10px] font-semibold font-inter">Cek Order</span>
         </button>
 
-        <button 
+        <button
           onClick={() => handleNavClick('tutorial')}
           className={`flex flex-col items-center gap-1 ${view === 'tutorial' ? 'text-[#27AAE1]' : 'text-gray-400'}`}
         >
@@ -100,7 +102,7 @@ function App() {
           <span className="text-[10px] font-semibold font-inter">Tutorial</span>
         </button>
 
-        <button 
+        <button
           onClick={() => handleNavClick('bantuan')}
           className={`flex flex-col items-center gap-1 ${view === 'bantuan' ? 'text-[#27AAE1]' : 'text-gray-400'}`}
         >

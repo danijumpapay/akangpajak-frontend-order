@@ -11,6 +11,10 @@ import { Breadcrumbs } from '@/components/shared/Breadcrumbs';
 import { OrderServiceInfo } from './components/OrderServiceInfo';
 import servicesConfig from './data/services-config.json';
 import { orderSchema, OrderFormData } from './types';
+import { checkVehicleTax } from '@/api/vehicle';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 interface FormField {
   id: keyof OrderFormData;
@@ -23,7 +27,7 @@ interface FormField {
 
 export const OrderForm = () => {
   const { selectedService, orderData, setOrderData, nextStep } = useOrderStore();
-  
+
   const config = servicesConfig.services.find(s => s.id === selectedService?.id);
   const allFields: FormField[] = [
     ...(servicesConfig.defaultFields as unknown as FormField[]),
@@ -35,9 +39,63 @@ export const OrderForm = () => {
     defaultValues: orderData
   });
 
-  const onSubmit = (data: OrderFormData) => {
-    setOrderData(data);
-    nextStep();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (data: OrderFormData) => {
+    setIsLoading(true);
+    try {
+      const cleanPlate = data.plateNumber.replace(/\s/g, '');
+      const response = await checkVehicleTax(cleanPlate);
+
+      if (response.success && response.data) {
+        const apiNik = response.data.NO_KTP;
+        const apiChassisLast4 = response.data.NO_RANGKA.slice(-4);
+
+        const inputChassisLast4 = data.no_rangka.slice(-4);
+
+        if (apiNik !== data.nik) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Data Tidak Sesuai',
+            text: 'NIK tidak cocok dengan data kendaraan.',
+            confirmButtonColor: '#27AAE1',
+            confirmButtonText: 'Cek Lagi'
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        if (apiChassisLast4 !== inputChassisLast4) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Data Tidak Sesuai',
+            text: '4 digit terakhir nomor rangka tidak cocok.',
+            confirmButtonColor: '#27AAE1',
+            confirmButtonText: 'Cek Lagi'
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        setOrderData({
+          ...data,
+          apiVehicleData: response.data
+        });
+        nextStep();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Data kendaraan tidak ditemukan atau terjadi kesalahan.',
+          confirmButtonColor: '#27AAE1'
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Gagal mengecek data kendaraan. Silakan coba lagi.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const inputStyles = "w-full bg-gray-50 border border-gray-100 rounded-xl p-3.5 text-sm focus-visible:ring-0 focus:border-[#27AAE1] outline-none transition-all h-auto";
@@ -48,7 +106,7 @@ export const OrderForm = () => {
         <Breadcrumbs currentPage="Detail Order" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mt-7 items-start">
-          <OrderServiceInfo 
+          <OrderServiceInfo
             title={selectedService?.title}
             image={selectedService?.image}
             description={selectedService?.description}
@@ -56,11 +114,11 @@ export const OrderForm = () => {
 
           <div className="lg:col-span-5 w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 md:space-y-6">
-              
+
               {allFields.map((field) => {
                 const fieldId = field.id as keyof OrderFormData;
                 const error = errors[fieldId] as FieldError | undefined;
-                
+
                 return (
                   <div key={String(fieldId)} className="space-y-2">
                     <div className="flex items-center gap-2">
@@ -76,21 +134,21 @@ export const OrderForm = () => {
                         </Tooltip>
                       )}
                     </div>
-                    
+
                     {fieldId === 'whatsapp' ? (
                       <div className="flex gap-2">
                         <div className="bg-gray-100 border border-gray-200 px-4 py-3.5 rounded-xl text-gray-500 text-sm flex items-center font-bold">+62</div>
-                        <Input 
-                          {...register('whatsapp')} 
-                          className={`${inputStyles} flex-1 ${error ? 'border-red-500' : ''}`} 
+                        <Input
+                          {...register('whatsapp')}
+                          className={`${inputStyles} flex-1 ${error ? 'border-red-500' : ''}`}
                         />
                       </div>
                     ) : field.type === 'select' ? (
-                      <Select 
-                        onValueChange={(val) => { 
-                          setValue(fieldId, val as OrderFormData[keyof OrderFormData]); 
-                          trigger(fieldId); 
-                        }} 
+                      <Select
+                        onValueChange={(val) => {
+                          setValue(fieldId, val as OrderFormData[keyof OrderFormData]);
+                          trigger(fieldId);
+                        }}
                         defaultValue={String(orderData[fieldId as keyof typeof orderData] || '')}
                       >
                         <SelectTrigger className={`${inputStyles} ${error ? 'border-red-500' : ''}`}>
@@ -103,18 +161,18 @@ export const OrderForm = () => {
                         </SelectContent>
                       </Select>
                     ) : (
-                      <Input 
-                        {...register(fieldId)} 
+                      <Input
+                        {...register(fieldId)}
                         onChange={(e) => {
                           if (fieldId === 'plateNumber') {
                             e.target.value = e.target.value.toUpperCase();
                           }
                           register(fieldId).onChange(e);
                         }}
-                        className={`${inputStyles} ${fieldId === 'plateNumber' ? 'uppercase' : ''} ${error ? 'border-red-500' : ''}`} 
+                        className={`${inputStyles} ${fieldId === 'plateNumber' ? 'uppercase' : ''} ${error ? 'border-red-500' : ''}`}
                       />
                     )}
-                    
+
                     {error && (
                       <p className="text-red-500 text-[10px] font-bold mt-1">
                         {error.message}
@@ -124,11 +182,12 @@ export const OrderForm = () => {
                 );
               })}
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="btn-akang-primary w-full text-white py-7 rounded-xl font-extrabold text-base transition-all shadow-sm"
+                disabled={isLoading}
               >
-                Order Sekarang
+                {isLoading ? 'Mengecek Data...' : 'Order Sekarang'}
               </Button>
             </form>
           </div>

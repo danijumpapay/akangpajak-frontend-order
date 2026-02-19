@@ -3,6 +3,7 @@ import { PriceDetailModal } from './PriceDetailModal';
 import { CheckCircle2, Ticket, XCircle, AlertCircle } from 'lucide-react';
 import { useOrderStore } from '@/store/useOrderStore';
 import { formatCurrency } from '@/lib/utils';
+import { parseCurrency } from '@/lib/order-utils';
 
 interface OrderSummaryProps {
   serviceImage?: string;
@@ -22,7 +23,19 @@ export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address,
   const [addressError, setAddressError] = useState(false);
   const [detailError, setDetailError] = useState(false);
 
-  const baseSubtotal = 345600;
+  const { apiVehicleData } = orderData;
+
+  const pkbPokok = parseCurrency(apiVehicleData?.PKB_POKOK);
+  const pkbDenda = parseCurrency(apiVehicleData?.PKB_DENDA);
+  const swdPokok = parseCurrency(apiVehicleData?.SWD_POKOK);
+  const swdDenda = parseCurrency(apiVehicleData?.SWD_DENDA);
+  const pnbStnk = parseCurrency(apiVehicleData?.ADM_STNK);
+  const pnbTnkb = parseCurrency(apiVehicleData?.ADM_TNKB);
+
+  const opsenPokok = parseCurrency(apiVehicleData?.OPSEN_POKOK);
+  const opsenDenda = parseCurrency(apiVehicleData?.OPSEN_DENDA);
+
+  const baseSubtotal = pkbPokok + pkbDenda + swdPokok + swdDenda + opsenPokok + opsenDenda + pnbStnk + pnbTnkb;
   const adminFee = 10000;
 
   const isOngkirVoucher = appliedVoucherType === 'ONGKIR';
@@ -30,10 +43,7 @@ export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address,
   const currentPickupFee = (isOngkirVoucher || deliveryFee === 0) ? 0 : deliveryFee;
   const discountAmount = isDiscountVoucher ? Math.round(baseSubtotal * 0.05) : 0;
 
-  // Correct calculation for external total (includes all fees)
   const finalTotal = baseSubtotal + adminFee + currentPickupFee - discountAmount;
-
-  // Calculate total for modal (excluding admin and ongkir as they are not separate items in the list)
   const modalTotal = baseSubtotal - discountAmount;
 
   const handleApplyVoucher = () => {
@@ -92,14 +102,14 @@ export const OrderSummary = ({ serviceImage, serviceTitle, deliveryFee, address,
   };
 
   const priceBreakdown = [
-    { label: 'PKB Pokok', value: 90700 },
-    { label: 'PKB Denda', value: 0 },
-    { label: 'SWDKLLJ Pokok', value: 35000 },
-    { label: 'SWDKLLJ Denda', value: 0 },
-    { label: 'PNB STNK', value: 100000 },
-    { label: 'PNB TNKB', value: 60000 },
-    { label: 'OPSEN PKB Pokok', value: 59900 },
-    { label: 'OPSEN PKB Denda', value: 0 },
+    { label: 'PKB Pokok', value: pkbPokok },
+    { label: 'PKB Denda', value: pkbDenda },
+    { label: 'SWDKLLJ Pokok', value: swdPokok },
+    { label: 'SWDKLLJ Denda', value: swdDenda },
+    { label: 'PNB STNK', value: pnbStnk },
+    { label: 'PNB TNKB', value: pnbTnkb },
+    { label: 'OPSEN PKB Pokok', value: opsenPokok },
+    { label: 'OPSEN PKB Denda', value: opsenDenda },
     ...(isDiscountVoucher ? [{ label: 'Diskon Voucher (5%)', value: -discountAmount, isBold: true }] : []),
   ];
 

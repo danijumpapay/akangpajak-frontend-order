@@ -3,6 +3,7 @@ import { MapPin, Building2, Ticket, AlertCircle, MotorbikeIcon, Truck } from 'lu
 import { westJavaCities } from '@/data/west-java-cities';
 import { formatCurrency } from '@/lib/utils';
 import { DeliveryOption } from '@/types/payment';
+import { getDeliveryPricing } from '@/data/pricing-config';
 
 interface PickupTypeCardProps {
   address: string;
@@ -29,26 +30,34 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const isOutOfRange = isManualCity;
-  const surcharge = isOutOfRange ? 19900 : 0;
+  const pricing = getDeliveryPricing(selectedCity, vehicleType);
+
+  const currentSurcharge = isOutOfRange ? pricing.surcharge : 0;
+  const expressPrice = pricing.express;
+  const regulerPrice = pricing.reguler;
+
+  const surcharge = currentSurcharge;
   const etaOffset = isOutOfRange ? ' + 2 hari' : '';
 
-  const isMotor = vehicleType.toLowerCase() === 'motor';
+  const bonusText = vehicleType.toLowerCase() === 'motor'
+    ? 'Voucher belanja Planet Ban max 20K'
+    : 'Voucher Mobeng senilai 100K';
 
   const options: DeliveryOption[] = [
     {
       id: 'express',
       title: 'Express',
-      price: isMotor ? 29900 : 59900,
+      price: expressPrice,
       eta: `1 - 2 hari${etaOffset}`,
-      bonus: isMotor ? 'Voucher belanja Planet Ban max 20K' : 'Voucher Mobeng senilai 100K',
+      bonus: bonusText,
       icon: <MotorbikeIcon size={22} />
     },
     {
       id: 'reguler',
       title: 'Reguler',
-      price: isMotor ? 19900 : 49900,
+      price: regulerPrice,
       eta: `3 - 5 hari${etaOffset}`,
-      bonus: isMotor ? 'Voucher belanja Planet Ban max 20K' : 'Voucher Mobeng senilai 100K',
+      bonus: bonusText,
       icon: <Truck size={22} />
     }
   ];
@@ -184,7 +193,7 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
         {isOutOfRange && (
           <div className="flex items-start gap-2 text-xs text-orange-600 bg-orange-50 p-3 rounded-xl">
             <AlertCircle size={14} className="mt-0.5 shrink-0" />
-            <p>Lokasi diluar jangkauan utama, akan dikenakan biaya tambahan <b>Rp19.900</b> dan estimasi waktu <b>+2 hari kerja</b>.</p>
+            <p>Lokasi diluar jangkauan utama, akan dikenakan biaya tambahan <b>{formatCurrency(surcharge)}</b> dan estimasi waktu <b>+2 hari kerja</b>.</p>
           </div>
         )}
       </div>
@@ -217,7 +226,7 @@ export const PickupTypeCard = ({ address, onEditAddress, onFeeChange, vehicleTyp
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-[#27AAE1]">{formatCurrency(finalPrice)}</p>
-                      {surcharge > 0 && <p className="text-[10px] text-orange-500 font-medium">(+Extra Rp{Math.floor(surcharge / 1000)}K)</p>}
+                      {surcharge > 0 && <p className="text-[10px] text-orange-500 font-medium">Sudah termasuk tambahan ongkir</p>}
                     </div>
                   </div>
 
